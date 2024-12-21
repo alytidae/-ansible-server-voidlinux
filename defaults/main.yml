@@ -14,6 +14,7 @@ locales:
 samba_username: "smbuser"
 # Change here to a MORE complex password 
 samba_password: "password"
+samba_path: "/data/share"
 
 # If you set here your public key, it will copy to 
 # /home/{username}/.ssh/authorized_keys. If not, 

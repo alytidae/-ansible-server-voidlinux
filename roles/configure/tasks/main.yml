@@ -1,19 +1,19 @@
 ---
-- name: Creating the directories to containers in /home
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    mode: 0755
-  loop:
-    - "/home/{{ username }}/containers/jellyfin/config"        
-    - "/home/{{ username }}/containers/jellyfin/cache" 
-    - "/home/{{ username }}/containers/jellyfin/media" 
-    - "/home/{{ username }}/containers/gitea" 
-    - "/home/{{ username }}/containers/immich/library"       
-    - "/home/{{ username }}/containers/prometheus"
-    - "/mnt/share"
+# - name: Creating the directories to containers in /home
+#   file:
+#     path: "{{ item }}"
+#     state: directory
+#     owner: "{{ username }}"
+#     group: "{{ username }}"
+#     mode: 0755
+#   loop:
+#     - "/home/{{ username }}/containers/jellyfin/config"        
+#     - "/home/{{ username }}/containers/jellyfin/cache" 
+#     - "/home/{{ username }}/containers/jellyfin/media" 
+#     - "/home/{{ username }}/containers/gitea" 
+#     - "/home/{{ username }}/containers/immich/library"       
+#     - "/home/{{ username }}/containers/prometheus"
+#     - "/mnt/share"
 
 # CHANGE THIS
 # - name: Copy prometheus config file in /containers/prometheus
@@ -113,7 +113,7 @@
 
 - name: Change folder /share ownership, group and permissions
   file:
-    path: "/share"
+    path: "{{samba_path}}"
     owner: "{{ samba_username }}"
     group: smbgroup
     mode: '0775'
@@ -125,7 +125,7 @@
     path: /etc/samba/smb.conf
     block: |
       [share]
-          path = /share
+          path = {{ samba_path }}
           readonly = no
           guest ok = no
           valid users = {{ samba_username }}
