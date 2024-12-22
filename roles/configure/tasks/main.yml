@@ -139,3 +139,14 @@
   service:
     name: smbd
     state: started
+
+- name: Enable docker
+  service:
+    name: docker
+    enabled: yes
+
+- name: Start docker
+  service:
+    name: docker
+    state: started
+
