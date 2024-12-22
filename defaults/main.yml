@@ -38,3 +38,6 @@ firewall_allow_ports:
   - 3002  # gitea ssh
   - 3003  # immich
   - 3004  # grafana
+  - 3005  # qbittorrent gui
+  - 6881  # qbittorrent torrent
+
