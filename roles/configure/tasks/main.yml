@@ -1,19 +1,13 @@
 ---
-# - name: Creating the directories to containers in /home
-#   file:
-#     path: "{{ item }}"
-#     state: directory
-#     owner: "{{ username }}"
-#     group: "{{ username }}"
-#     mode: 0755
-#   loop:
-#     - "/home/{{ username }}/containers/jellyfin/config"        
-#     - "/home/{{ username }}/containers/jellyfin/cache" 
-#     - "/home/{{ username }}/containers/jellyfin/media" 
-#     - "/home/{{ username }}/containers/gitea" 
-#     - "/home/{{ username }}/containers/immich/library"       
-#     - "/home/{{ username }}/containers/prometheus"
-#     - "/mnt/share"
+- name: Creating the directories to containers in /home
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+  loop:
+    - "/home/{{ username }}/backup_logs/"        
 
 # CHANGE THIS
 # - name: Copy prometheus config file in /containers/prometheus
@@ -159,3 +153,24 @@
   service:
     name: cronie
     state: started
+
+- name: Enable logging socklog-unix
+  service:
+    name: socklog-unix
+    enabled: yes
+
+- name: Start logging socklog-unix
+  service:
+    name: socklog-unix
+    state: started
+
+- name: Enable logging nanoklogd 
+  service:
+    name: nanoklogd
+    enabled: yes
+
+- name: Start logging nanoklogd
+  service:
+    name: nanoklogd
+    state: started
+
