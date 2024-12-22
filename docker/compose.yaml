@@ -170,6 +170,24 @@ services:
     depends_on:
       - tailscale-nginx
     network_mode: service:tailscale-nginx
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - qbittorrent:/config
+      - ${JELLYFIN_DATA_PATH}:/downloads 
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
 
 volumes:
   pgdata:
@@ -180,3 +198,4 @@ volumes:
   prom-data:    
   tailscale-nginx:
   jellyfin:
+  qbittorrent:
