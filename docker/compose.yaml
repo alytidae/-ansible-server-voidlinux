@@ -121,6 +121,7 @@ services:
       - docker.env
     restart: unless-stopped
 
+  # When you will add prometheus in grafana, the connection url will be http://prometheus:9090
   prometheus:
     image: prom/prometheus
     container_name: prometheus
