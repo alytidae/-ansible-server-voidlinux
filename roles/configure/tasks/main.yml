@@ -150,3 +150,12 @@
     name: docker
     state: started
 
+- name: Enable cronie
+  service:
+    name: cronie
+    enabled: yes
+
+- name: Start cronie
+  service:
+    name: cronie
+    state: started
